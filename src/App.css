@@ -1,0 +1,60 @@
+@font-face {
+  font-style: normal;
+  font-weight: normal;
+  font-family: "Open Sans";
+  src: url("./Assets/Fonts/OpenSans-Regular.woff2") format("woff2")
+}
+
+body {
+  background: #f3f7fa;
+}
+
+.App {
+  width: 960px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  margin-top: 40px;
+  margin-bottom: 17px;
+
+  text-align: center;
+}
+
+.main {
+  display: flex;
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.list {
+  list-style: none;
+}
+
+@supports(-webkit-appearance: none) or (-moz-appearance: none) {
+  input[type='checkbox'],
+  input[type='radio'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}
