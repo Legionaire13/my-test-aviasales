@@ -1,7 +1,7 @@
 import React from "react"
 import "./Filter.scss"
 
-export default function Filter() {
+export default function Filter(props) {
   return (
     <ul className="filter list">
       <h2 className="filter__headline">Количество пересадок</h2>
