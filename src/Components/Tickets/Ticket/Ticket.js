@@ -51,12 +51,12 @@ export default function Ticket() {
     ]
   }
 
-  function renderSegments(arr) {
-    return arr.map((item) => {
+  function renderSegments(arr, i) {
+    return arr.map((item, i) => {
       const { origin, destination, date, stops, duration } = item
 
       return (
-        <table className="ticket__table">
+        <table className="ticket__table" key={`indx-${i}`}>
           <thead>
             <tr>
               <th className="ticket__col1">

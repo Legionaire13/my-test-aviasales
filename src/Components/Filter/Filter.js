@@ -2,62 +2,36 @@ import React from "react"
 import "./Filter.scss"
 
 export default function Filter(props) {
+  let { filters, onChange } = props
+
+  const renderFilter = (filter, i) => {
+    const classes = []
+
+    if (filter.checked) {
+      classes.push("filter__input--checked")
+    }
+
+    return (
+      <li className="filter__item" key={`option-${i}`}>
+        <input
+          id={filter.name}
+          name={filter.name}
+          className={`visually-hidden filter__input ${ (filter.checked) ?  classes.join("") : ""}`}
+          type="checkbox"
+          checked={filter.checked}
+          onChange={onChange}
+        />
+        <label className="filter__label" htmlFor={filter.name}>
+          {filter.label}
+        </label>
+      </li>
+    )
+  }
+
   return (
     <ul className="filter list">
       <h2 className="filter__headline">Количество пересадок</h2>
-      <li className="filter__item">
-        <input
-          id="transfers-all"
-          className="visually-hidden filter__input"
-          type="checkbox"
-        />
-        <label className="filter__label" htmlFor="transfers-all">
-          Все
-        </label>
-      </li>
-      <li className="filter__item">
-        <input
-          id="transfers-0"
-          className="visually-hidden filter__input"
-          type="checkbox"
-          checked
-        />
-        <label className="filter__label" htmlFor="transfers-0">
-          Без пересадок
-        </label>
-      </li>
-      <li className="filter__item">
-        <input
-          id="transfers-1"
-          className="visually-hidden filter__input"
-          type="checkbox"
-          checked
-        />
-        <label className="filter__label" htmlFor="transfers-1">
-          1 пересадка
-        </label>
-      </li>
-      <li className="filter__item">
-        <input
-          id="transfers-2"
-          className="visually-hidden filter__input"
-          type="checkbox"
-          checked
-        />
-        <label className="filter__label" htmlFor="transfers-2">
-          2 пересадки
-        </label>
-      </li>
-      <li className="filter__item">
-        <input
-          id="transfers-3"
-          className="visually-hidden filter__input"
-          type="checkbox"
-        />
-        <label className="filter__label" htmlFor="transfers-3">
-          3 пересадки
-        </label>
-      </li>
+      {filters.map((item, i) => renderFilter(item, i))}
     </ul>
   )
 }

@@ -5,18 +5,54 @@ import Logo from "./components/Logo/Logo"
 import "./App.css"
 
 function App() {
-  // const [filterItem, setFilterItems] = useState([
-  //   {id: }
-  // ])
+  let [filters, setFilters] = useState([
+    {
+      name: "transfers-all",
+      label: "Все",
+      checked: false
+    },
+    {
+      name: "transfers-0",
+      label: "Без пересадок",
+      checked: false
+    },
+    {
+      name: "transfers-1",
+      label: "1 пересадка",
+      checked: false
+    },
+    {
+      name: "transfers-2",
+      label: "2 пересадки",
+      checked: false
+    },
+    {
+      name: "transfers-3",
+      label: "3 пересадки",
+      checked: false
+    }
+  ])
 
-  const toggleFilter = (event) => {
+  const handleFilter = (event) => {
     event.preventDefault()
 
-    // setStops(
-    if (event.target.checked === true) {
-      return (event.target.checked = !event.target.checked)
-    }
-    // )
+    event.target.name !== "transfers-all"
+      ? setFilters(
+          filters.map((filter) => {
+            if (event.target.name === filter.name) {
+              filter.checked = !filter.checked
+            }
+
+            return filter
+          })
+        )
+      : setFilters(
+          filters.map((filter) => {
+            filter.checked = event.target.checked
+
+            return filter
+          })
+        )
   }
 
   return (
@@ -28,10 +64,7 @@ function App() {
         </a>
       </header>
       <main className="main">
-        <Filter
-          // stops={stops}
-          onClick={toggleFilter}
-        />
+        <Filter filters={filters} onChange={handleFilter} />
         <Tickets />
       </main>
     </article>
