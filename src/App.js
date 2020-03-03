@@ -40,6 +40,10 @@ function App() {
     event.target.name !== "transfers-all"
       ? setFilters(
           filters.map((filter) => {
+            if (filter.name === "transfers-all") {
+              filter.checked = false
+            }
+
             if (event.target.name === filter.name) {
               filter.checked = !filter.checked
             }
