@@ -1,7 +1,9 @@
 import React from "react"
 import "./Ticket.scss"
 
-export default function Ticket() {
+export default function Ticket(props) {
+  const { details } = props
+
   // data output formatting
   const formatHandler = {
     numbers: new Intl.NumberFormat(`ru-RU`),
@@ -28,27 +30,6 @@ export default function Ticket() {
         ...options
       )} - ${arrival.toLocaleString(...options)}`
     }
-  }
-
-  const mock = {
-    price: 97960,
-    carrier: "S7",
-    segments: [
-      {
-        origin: "MOW",
-        destination: "HKT",
-        date: "2020-03-02T23:19:00.000Z",
-        stops: ["BKK", "HKG"],
-        duration: 1589
-      },
-      {
-        origin: "MOW",
-        destination: "HKT",
-        date: "2020-03-23T12:07:00.000Z",
-        stops: ["AUH", "SHA", "DXB"],
-        duration: 1394
-      }
-    ]
   }
 
   function renderSegments(arr, i) {
@@ -84,7 +65,7 @@ export default function Ticket() {
     })
   }
 
-  const { price, carrier, segments } = mock
+  const { price, carrier, segments } = details
 
   return (
     <li>
@@ -102,38 +83,6 @@ export default function Ticket() {
 
         <main className="ticket__body">
           {renderSegments(segments)}
-          {/* <table className="ticket__table">
-            <thead>
-              <tr>
-                <th className="ticket__col1">MOW - HKT</th>
-                <th className="ticket__col2">В пути</th>
-                <th className="ticket__col3">2 пересадки</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="ticket__col1">10:45 - 08:00</td>
-                <td className="ticket__col2">21ч 15м</td>
-                <td className="ticket__col3">HKG, JBN</td>
-              </tr>
-            </tbody>
-          </table>
-          <table className="ticket__table">
-            <thead>
-              <tr>
-                <th className="ticket__col1">MOW - HKT</th>
-                <th className="ticket__col2">В пути</th>
-                <th className="ticket__col3">1 пересадка</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="ticket__col1">11:20 - 00:50</td>
-                <td className="ticket__col2">13ч 30м</td>
-                <td className="ticket__col3">HKG</td>
-              </tr>
-            </tbody>
-          </table> */}
         </main>
       </article>
     </li>

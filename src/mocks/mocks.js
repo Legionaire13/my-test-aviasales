@@ -1,4 +1,4 @@
-const mock = [
+const mocks = [
   {
     price: 97960,
     carrier: "S7",
@@ -100,3 +100,5 @@ const mock = [
     ]
   }
 ]
+
+export default mocks
