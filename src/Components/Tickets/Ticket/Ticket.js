@@ -9,8 +9,8 @@ export default function Ticket(props) {
     numbers: new Intl.NumberFormat(`ru-RU`),
     stops: ["Без пересадок", "1 пересадка", "2 пересадки", "3 пересадки"],
     duration: (duration) => {
-      const hours = (duration / 60).toFixed()
-      const mins = ((duration / 60 - hours) * 60).toFixed()
+      const hours = Math.floor(duration / 60) // округляем в меньшую
+      const mins = Math.round((duration / 60 - hours) * 60) // округляем до ближайшего целого
       return `${hours}ч ${mins}м`
     },
     time: (departure, duration) => {
@@ -37,7 +37,7 @@ export default function Ticket(props) {
       const { origin, destination, date, stops, duration } = item
 
       return (
-        <table className="ticket__table" key={`indx-${i}`}>
+        <table className="ticket__table" key={`id${i}`}>
           <thead>
             <tr>
               <th className="ticket__col1">
@@ -81,9 +81,7 @@ export default function Ticket(props) {
           />
         </header>
 
-        <main className="ticket__body">
-          {renderSegments(segments)}
-        </main>
+        <main className="ticket__body">{renderSegments(segments)}</main>
       </article>
     </li>
   )
