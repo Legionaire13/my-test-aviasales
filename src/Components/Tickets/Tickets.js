@@ -3,14 +3,8 @@ import Ticket from "./Ticket/Ticket"
 import mocks from "../../mocks/mocks"
 import "./Tickets.scss"
 
-export default function Tickets() {
-  let { sortedBy, setSortedBy } = useState("cheapest")
-
-  const handleSorting = (str) => {
-    setSortedBy(str)
-  }
-
-  // при изменении состояния повесить класс и проапдейтить стейт
+export default function Tickets(props) {
+  const { sortingConditions, handleSortingConditions } = props
 
   return (
     <div className="tickets">
@@ -18,12 +12,18 @@ export default function Tickets() {
 
       <ul className="tickets__button-list">
         <li>
-          <button className={`tickets__button tickets__button--left tickets__button--active`}>
+          <button
+            className={`tickets__button tickets__button--left ${
+              sortingConditions ? `tickets__button--active` : ``
+            }`} onClick={handleSortingConditions}>
             Самый дешевый
           </button>
         </li>
         <li>
-          <button className="tickets__button tickets__button--right">
+          <button
+            className={`tickets__button tickets__button--right ${
+              sortingConditions ? `` : `tickets__button--active`
+            }`} onClick={handleSortingConditions}>
             Самый быстрый
           </button>
         </li>

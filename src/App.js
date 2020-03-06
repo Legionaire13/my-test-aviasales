@@ -6,6 +6,7 @@ import Logo from "./components/Logo/Logo"
 import "./App.css"
 
 function App() {
+  let [isCheapest, setIsCheapest] = useState(true)
   let [filters, setFilters] = useState([
     {
       name: "transfers-all",
@@ -60,6 +61,8 @@ function App() {
         )
   }
 
+  const handleSorting = () => setIsCheapest(!isCheapest)
+
   return (
     <article className="App">
       <h1 className="visually-hidden">Лучшие варианты перелетов</h1>
@@ -70,7 +73,7 @@ function App() {
       </header>
       <main className="main">
         <Filter filters={filters} onChange={handleFilter} />
-        <Tickets />
+        <Tickets sortingConditions={isCheapest} handleSortingConditions={handleSorting} />
       </main>
     </article>
   )
