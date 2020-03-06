@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import Ticket from "./Ticket/Ticket"
-import mocks from "../../mocks/mocks"
+import mocks from "../../mocks"
 import "./Tickets.scss"
 
 export default function Tickets(props) {
-  const { sortingConditions, handleSortingConditions } = props
+  const { sorting, handleSorting } = props
 
   return (
     <div className="tickets">
@@ -14,16 +14,16 @@ export default function Tickets(props) {
         <li>
           <button
             className={`tickets__button tickets__button--left ${
-              sortingConditions ? `tickets__button--active` : ``
-            }`} onClick={handleSortingConditions}>
+              sorting ? `tickets__button--active` : ``
+            }`} onClick={handleSorting}>
             Самый дешевый
           </button>
         </li>
         <li>
           <button
             className={`tickets__button tickets__button--right ${
-              sortingConditions ? `` : `tickets__button--active`
-            }`} onClick={handleSortingConditions}>
+              sorting ? `` : `tickets__button--active`
+            }`} onClick={handleSorting}>
             Самый быстрый
           </button>
         </li>

@@ -5,18 +5,14 @@ export default function Filter(props) {
   let { filters, onChange } = props
 
   const renderFilter = (filter, i) => {
-    const classes = []
-
-    if (filter.checked) {
-      classes.push("filter__input--checked")
-    }
-
     return (
       <li className="filter__item" key={`option-${i}`}>
         <input
           id={filter.name}
           name={filter.name}
-          className={`visually-hidden filter__input ${ (filter.checked) ?  classes.join("") : ""}`}
+          className={`visually-hidden filter__input ${
+            filter.checked ? `filter__input--checked` : ``
+          }`}
           type="checkbox"
           checked={filter.checked}
           onChange={onChange}

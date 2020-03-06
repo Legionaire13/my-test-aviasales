@@ -9,8 +9,8 @@ export default function Ticket(props) {
     numbers: new Intl.NumberFormat(`ru-RU`),
     stops: ["Без пересадок", "1 пересадка", "2 пересадки", "3 пересадки"],
     duration: (duration) => {
-      const hours = Math.floor(duration / 60) // округляем в меньшую
-      const mins = Math.round((duration / 60 - hours) * 60) // округляем до ближайшего целого
+      const hours = Math.floor(duration / 60)
+      const mins = Math.round((duration / 60 - hours) * 60)
       return `${hours}ч ${mins}м`
     },
     time: (departure, duration) => {

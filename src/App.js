@@ -6,7 +6,7 @@ import Logo from "./components/Logo/Logo"
 import "./App.css"
 
 function App() {
-  let [isCheapest, setIsCheapest] = useState(true)
+  let [sortCondition, setSortingCondition] = useState(true)
   let [filters, setFilters] = useState([
     {
       name: "transfers-all",
@@ -61,7 +61,7 @@ function App() {
         )
   }
 
-  const handleSorting = () => setIsCheapest(!isCheapest)
+  const handleSorting = () => setSortingCondition(!sortCondition)
 
   return (
     <article className="App">
@@ -73,7 +73,7 @@ function App() {
       </header>
       <main className="main">
         <Filter filters={filters} onChange={handleFilter} />
-        <Tickets sortingConditions={isCheapest} handleSortingConditions={handleSorting} />
+        <Tickets sorting={sortCondition} handleSorting={handleSorting} />
       </main>
     </article>
   )
