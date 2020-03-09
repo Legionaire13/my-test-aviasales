@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Ticket from "./Ticket/Ticket"
-import mocks from "../../mocks"
+import mocks from "../../_mocks"
 import "./Tickets.scss"
 
 export default function Tickets(props) {
