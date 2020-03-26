@@ -37,7 +37,7 @@ export default function Ticket(props) {
       const { origin, destination, date, stops, duration } = item
 
       return (
-        <table className="ticket__table" key={`id${i}`}>
+        <table className="ticket__table" key={`id-${i}`}>
           <thead>
             <tr>
               <th className="ticket__col1">

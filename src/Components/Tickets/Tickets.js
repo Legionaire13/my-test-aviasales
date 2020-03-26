@@ -1,10 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import Ticket from "./Ticket/Ticket"
-import mocks from "../../_mocks"
 import "./Tickets.scss"
 
 export default function Tickets(props) {
-  const { sorting, handleSorting } = props
+  const { tickets, sorting, handleSorting } = props
 
   return (
     <div className="tickets">
@@ -31,8 +30,8 @@ export default function Tickets(props) {
 
       <h3 className="visually-hidden">Список билетов</h3>
       <ul className="tickets__list">
-        {mocks.map((ticket) => (
-          <Ticket details={ticket} />
+        {tickets.map((ticket, index) => (
+          <Ticket details={ticket} key={`ticket_${index}`}/>
         ))}
       </ul>
     </div>
