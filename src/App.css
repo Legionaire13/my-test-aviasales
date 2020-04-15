@@ -7,6 +7,8 @@
 
 body {
   background: #f3f7fa;
+
+  width: 100%;
 }
 
 .App {
@@ -56,5 +58,13 @@ input[type="radio"].visually-hidden {
   input[type='radio'] {
     -webkit-appearance: none;
     -moz-appearance: none;
+  }
+}
+
+/* Избавляемся от скачка при появлении скролла */
+@media screen and (min-width: 700px) {
+  html {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
   }
 }

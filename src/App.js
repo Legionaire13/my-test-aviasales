@@ -8,77 +8,90 @@ import Logo from "./components/Logo/Logo"
 import "./App.css"
 
 function App() {
-  let [isCheapest, setIsCheapest] = useState(true)
-  let [filters, setFilters] = useState([
-    {
-      name: "transfers-all",
-      label: "Все",
-      checked: false,
-      stops: 3,
-    },
-    {
-      name: "transfers-0",
-      label: "Без пересадок",
-      checked: true,
-      stops: 0,
-    },
-    {
-      name: "transfers-1",
-      label: "1 пересадка",
-      checked: true,
-      stops: 1,
-    },
-    {
-      name: "transfers-2",
-      label: "2 пересадки",
-      checked: true,
-      stops: 2,
-    },
-    {
-      name: "transfers-3",
-      label: "3 пересадки",
-      checked: false,
-      stops: 3,
-    },
-  ])
+  const initialState = {
+    filters: [
+      {
+        name: "all",
+        checked: false,
+        stops: 3,
+      },
+      {
+        name: "zero",
+        checked: true,
+        stops: 0,
+      },
+      {
+        name: "one",
+        checked: true,
+        stops: 1,
+      },
+      {
+        name: "two",
+        checked: true,
+        stops: 2,
+      },
+      {
+        name: "three",
+        checked: false,
+        stops: 3,
+      },
+    ],
+    isCheapest: true,
+    loading: false,
+  }
+  const [appState, setAppState] = useState(initialState)
 
-  const handleFilter = (event) => {
-    event.preventDefault()
+  const handleFilter = (e) => {
+    e.preventDefault()
 
-    return event.target.name !== "transfers-all"
-      ? setFilters(
-          [...filters].map((filter) => {
-            if (filter.name === "transfers-all") {
+    return e.target.name !== "all"
+      ? setAppState({
+          ...appState,
+          filters: appState.filters.map((filter) => {
+            if (filter.name === "all") {
               filter.checked = false
             }
 
-            if (event.target.name === filter.name) {
+            if (e.target.name === filter.name) {
               filter.checked = !filter.checked
             }
 
             return filter
-          })
-        )
-      : setFilters(
-          [...filters].map((filter) => {
-            filter.checked = event.target.checked
+          }),
+        })
+      : setAppState({
+          ...appState,
+          filters: appState.filters.map((filter) => {
+            filter.checked = e.target.checked
 
             return filter
-          })
-        )
+          }),
+        })
   }
 
-  const useFetchRequest = (filters, isCheapest) => {
+  const handleSorting = () =>
+    setAppState({
+      ...appState,
+      isCheapest: !appState.isCheapest,
+    })
+
+  const useFetchRequest = (appState) => {
     const [result, setResult] = useState([])
+    const { filters, isCheapest } = appState
 
     useEffect(() => {
       async function fetchRequest() {
-        let response = await getTickets()
-        response = getTicketsFiltered(response, filters)
-        response = getTicketsSorted(response, isCheapest)
-        response.length = 5
+        console.log("useEffect rendered!")
+        setAppState({ ...appState, loading: true })
 
-        setResult(response)
+        let res = await getTickets()
+
+        res = getTicketsFiltered(res, filters)
+        res = getTicketsSorted(res, isCheapest)
+        res.length = 5
+
+        setAppState({ ...appState, loading: false })
+        setResult(res)
       }
 
       fetchRequest()
@@ -86,8 +99,6 @@ function App() {
 
     return result
   }
-
-  const handleSorting = () => setIsCheapest(!isCheapest)
 
   return (
     <article className="App">
@@ -98,11 +109,12 @@ function App() {
         </a>
       </header>
       <main className="main">
-        <Filter filters={filters} onChange={handleFilter} />
+        <Filter filters={appState.filters} onChange={handleFilter} />
         <Tickets
-          tickets={useFetchRequest(filters, isCheapest)}
-          sorting={isCheapest}
+          tickets={useFetchRequest(appState)}
+          sorting={appState.isCheapest}
           handleSorting={handleSorting}
+          loading={appState.loading}
         />
       </main>
     </article>

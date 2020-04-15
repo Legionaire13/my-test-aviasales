@@ -1,9 +1,12 @@
 import React from "react"
 import Ticket from "./Ticket/Ticket"
 import "./Tickets.scss"
+import "./Loader.scss"
 
 export default function Tickets(props) {
-  const { tickets, sorting, handleSorting } = props
+  const { tickets, sorting, handleSorting, loading } = props
+
+  const Loader = () => <div className="loader">Loading tickets...</div>
 
   return (
     <div className="tickets">
@@ -14,7 +17,8 @@ export default function Tickets(props) {
           <button
             className={`tickets__button tickets__button--left ${
               sorting ? `tickets__button--active` : ``
-            }`} onClick={handleSorting}>
+            }`}
+            onClick={handleSorting}>
             Самый дешевый
           </button>
         </li>
@@ -22,7 +26,8 @@ export default function Tickets(props) {
           <button
             className={`tickets__button tickets__button--right ${
               sorting ? `` : `tickets__button--active`
-            }`} onClick={handleSorting}>
+            }`}
+            onClick={handleSorting}>
             Самый быстрый
           </button>
         </li>
@@ -30,9 +35,11 @@ export default function Tickets(props) {
 
       <h3 className="visually-hidden">Список билетов</h3>
       <ul className="tickets__list">
-        {tickets.map((ticket, index) => (
-          <Ticket details={ticket} key={`ticket_${index}`}/>
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          tickets.map((ticket, i) => <Ticket details={ticket} key={`t${i}`} />)
+        )}
       </ul>
     </div>
   )

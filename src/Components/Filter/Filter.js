@@ -2,23 +2,32 @@ import React from "react"
 import "./Filter.scss"
 
 export default function Filter(props) {
-  let { filters, onChange } = props
+  const { filters, onChange } = props
+
+  const labels = {
+    all: "Все",
+    zero: "Без пересадок",
+    one: "1 пересадка",
+    two: "2 пересадки",
+    three: "3 пересадки",
+  }
 
   const renderFilter = (filter, i) => {
+    const { name, checked } = filter
     return (
       <li className="filter__item" key={`option-${i}`}>
         <input
-          id={filter.name}
-          name={filter.name}
+          id={name}
+          name={name}
           className={`visually-hidden filter__input ${
-            filter.checked ? `filter__input--checked` : ``
+            checked ? `filter__input--checked` : ``
           }`}
           type="checkbox"
-          checked={filter.checked}
+          checked={checked}
           onChange={onChange}
         />
-        <label className="filter__label" htmlFor={filter.name}>
-          {filter.label}
+        <label className="filter__label" htmlFor={name}>
+          {labels[name]}
         </label>
       </li>
     )
