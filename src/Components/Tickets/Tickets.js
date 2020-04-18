@@ -1,13 +1,9 @@
 import React from "react"
 import Ticket from "./Ticket/Ticket"
+import Loader from "./Loader/Loader"
 import "./Tickets.scss"
-import "./Loader.scss"
 
-export default function Tickets(props) {
-  const { tickets, sorting, handleSorting, loading } = props
-
-  const Loader = () => <div className="loader">Loading tickets...</div>
-
+export default function Tickets({ tickets, sorting, handleSorting, loading }) {
   return (
     <div className="tickets">
       <h2 className="visually-hidden">Билеты</h2>

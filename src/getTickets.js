@@ -1,7 +1,6 @@
 import mock from "./mock"
 
 export default async function getTickets() {
-
   // получаем searchID
   async function getSearchId() {
     console.log(`...getting an ID for tickets request`)

@@ -1,9 +1,7 @@
 import React from "react"
 import "./Filter.scss"
 
-export default function Filter(props) {
-  const { filters, onChange } = props
-
+export default function Filter({ filters, onChange }) {
   const labels = {
     all: "Все",
     zero: "Без пересадок",
@@ -12,8 +10,7 @@ export default function Filter(props) {
     three: "3 пересадки",
   }
 
-  const renderFilter = (filter, i) => {
-    const { name, checked } = filter
+  const renderFilter = ({ name, checked }, i) => {
     return (
       <li className="filter__item" key={`option-${i}`}>
         <input

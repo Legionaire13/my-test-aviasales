@@ -5,10 +5,9 @@ import getTickets from "./getTickets"
 import getTicketsFiltered from "./getTicketsFiltered"
 import getTicketsSorted from "./getTicketsSorted"
 import Logo from "./components/Logo/Logo"
-import mock from "./mock"
 import "./App.css"
 
-function App() {
+const App = () => {
   const initialState = {
     filters: [
       {
@@ -82,7 +81,6 @@ function App() {
 
     useEffect(() => {
       async function fetchRequest() {
-        // console.log("useEffect rendered!")
         setAppState({ ...appState, loading: true })
 
         let res = await getTickets()

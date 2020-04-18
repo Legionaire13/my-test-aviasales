@@ -1,9 +1,7 @@
 import React from "react"
 import "./Ticket.scss"
 
-export default function Ticket(props) {
-  const { details } = props
-
+export default function Ticket({ details }) {
   // data output formatting
   const formatHandler = {
     numbers: new Intl.NumberFormat(`ru-RU`),
@@ -18,8 +16,8 @@ export default function Ticket(props) {
         "ru-RU",
         {
           hour: "numeric",
-          minute: "numeric"
-        }
+          minute: "numeric",
+        },
       ]
 
       departure = Date.parse(departure)
@@ -29,13 +27,11 @@ export default function Ticket(props) {
       return `${departure.toLocaleString(
         ...options
       )} - ${arrival.toLocaleString(...options)}`
-    }
+    },
   }
 
   function renderSegments(arr, i) {
-    return arr.map((item, i) => {
-      const { origin, destination, date, stops, duration } = item
-
+    return arr.map(({ origin, destination, date, stops, duration }, i) => {
       return (
         <table className="ticket__table" key={`id-${i}`}>
           <thead>
