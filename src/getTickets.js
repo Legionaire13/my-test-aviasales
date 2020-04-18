@@ -1,13 +1,18 @@
+import mock from "./mock"
+
 export default async function getTickets() {
+
+  // получаем searchID
   async function getSearchId() {
     console.log(`...getting an ID for tickets request`)
     let response
-    // получаем searchID
     try {
       response = await fetch(`https://front-test.beta.aviasales.ru/search`)
     } catch (e) {
       console.error(e.error)
     }
+
+    if (!response) return undefined
 
     const { searchId } = await response.json()
     return searchId
@@ -38,6 +43,10 @@ export default async function getTickets() {
   }
 
   const searchID = await getSearchId()
+
+  // возвращаем макет если не был получен id поиска
+  if (!searchID) return mock
+
   let totalTicketsArr = []
   await getTicketsTotalArr(searchID)
 
