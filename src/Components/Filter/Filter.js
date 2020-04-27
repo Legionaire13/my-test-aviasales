@@ -1,7 +1,8 @@
 import React from "react"
+import PropTypes from "prop-types"
 import "./Filter.scss"
 
-export default function Filter({ filters, onChange }) {
+const Filter = ({ filters, onChange }) => {
   const labels = {
     all: "Все",
     zero: "Без пересадок",
@@ -37,3 +38,10 @@ export default function Filter({ filters, onChange }) {
     </ul>
   )
 }
+
+Filter.propTypes = {
+  filters: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
+
+export default Filter

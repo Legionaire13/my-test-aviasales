@@ -1,9 +1,10 @@
 import React from "react"
 import Ticket from "./Ticket/Ticket"
 import Loader from "./Loader/Loader"
+import PropTypes from "prop-types"
 import "./Tickets.scss"
 
-export default function Tickets({ tickets, sorting, handleSorting, loading }) {
+const Tickets = ({ tickets, sorting, handleSorting, loading }) => {
   return (
     <div className="tickets">
       <h2 className="visually-hidden">Билеты</h2>
@@ -40,3 +41,12 @@ export default function Tickets({ tickets, sorting, handleSorting, loading }) {
     </div>
   )
 }
+
+Tickets.propTypes = {
+  tickets: PropTypes.array.isRequired,
+  sorting: PropTypes.bool.isRequired,
+  handleSorting: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+}
+
+export default Tickets

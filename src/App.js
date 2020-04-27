@@ -38,11 +38,12 @@ const App = () => {
     ],
     isCheapest: true,
     loading: false,
+    lastReq: null,
   }
   const [appState, setAppState] = useState(initialState)
 
   const handleFilter = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
 
     return e.target.name !== "all"
       ? setAppState({
@@ -77,19 +78,26 @@ const App = () => {
 
   const useFetchRequest = (appState) => {
     const [result, setResult] = useState([])
-    const { filters, isCheapest } = appState
+    const { filters, isCheapest, lastReq } = appState
 
     useEffect(() => {
       async function fetchRequest() {
         setAppState({ ...appState, loading: true })
 
-        let res = await getTickets()
+        let res
+
+        if (Date.now() - lastReq < 5000) {
+          res = JSON.parse(sessionStorage.getItem("tickets"))
+        } else {
+          res = await getTickets()
+          sessionStorage.setItem("tickets", JSON.stringify(res))
+        }
 
         res = getTicketsFiltered(res, filters)
         res = getTicketsSorted(res, isCheapest)
         res.length = 5
 
-        setAppState({ ...appState, loading: false })
+        setAppState({ ...appState, loading: false, lastReq: Date.now() })
         setResult(res)
       }
 

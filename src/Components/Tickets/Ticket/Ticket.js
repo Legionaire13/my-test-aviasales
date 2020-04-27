@@ -1,7 +1,8 @@
 import React from "react"
+import PropTypes from "prop-types"
 import "./Ticket.scss"
 
-export default function Ticket({ details }) {
+const Ticket = ({ details }) => {
   // data output formatting
   const formatHandler = {
     numbers: new Intl.NumberFormat(`ru-RU`),
@@ -82,3 +83,9 @@ export default function Ticket({ details }) {
     </li>
   )
 }
+
+Ticket.propTypes = {
+  details: PropTypes.array.isRequired,
+}
+
+export default Ticket
