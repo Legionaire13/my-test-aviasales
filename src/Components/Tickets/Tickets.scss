@@ -58,3 +58,28 @@
     padding: 0px;
   }
 }
+
+/* mob */
+@media screen and (min-width: 320px) and (max-width: 550px) {
+  .tickets__list {
+    margin: 5px;
+  }
+
+  .tickets__button-list {
+    margin-left: 5px;
+    margin-right: 5px;
+    justify-content: center;
+  }
+
+  .tickets__button,
+  .tickets__button--active {
+    width: 150px;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 425px) {
+  .tickets__button,
+  .tickets__button--active {
+    min-width: 100%;
+  }
+}

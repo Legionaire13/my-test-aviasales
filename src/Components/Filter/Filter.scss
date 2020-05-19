@@ -60,7 +60,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    user-select: none;  
+    user-select: none;
 
     &:hover {
       background-color: #f1fcff;
@@ -82,5 +82,14 @@
       box-sizing: border-box;
       border-radius: 2px;
     }
+  }
+}
+
+/* mob */
+@media screen and (min-width: 320px) and (max-width: 550px) {
+  .filter {
+    min-width: calc(100% - 10px);
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }
